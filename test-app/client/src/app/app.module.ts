@@ -18,6 +18,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { MatTooltipModule, MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
 import { PersonsComponent } from './components/persons/persons.component';
 import { PersonsModalComponent } from './components/persons/persons-modal/persons-modal.component';
+import { CarsComponent } from './components/cars/cars.component';
+import { CarsModalComponent } from './components/cars/cars-modal/cars-modal.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { PersonsModalComponent } from './components/persons/persons-modal/person
     InformationModalComponent,
     ConfirmDialogComponent,
     PersonsComponent,
-    PersonsModalComponent
+    PersonsModalComponent,
+    CarsComponent,
+    CarsModalComponent
   ],
   imports: [
     BrowserModule,
