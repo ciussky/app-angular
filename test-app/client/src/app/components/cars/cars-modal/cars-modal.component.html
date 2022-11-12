@@ -1,1 +1,29 @@
-<p>cars-modal works!</p>
+<div class='modal-header'>
+    <h4 class='modal-title'>{{id_car ? 'Modificare' : 'Adăugare'}} masina</h4>
+  </div>
+  
+  <div class='modal-body'>
+    <div class='row'>
+      <label class='col-2 control-label'>Marca*</label>
+      <div class='col-9'>
+        <input [(ngModel)]='modal.make' class='form-control' placeholder='Denumire marca...' maxlength='255'/>
+      </div>
+      <!-- <label class='col-2 control-label'>Prenume*</label>
+      <div class='col-9'>
+        <input [(ngModel)]='modal.lname' class='form-control' placeholder='Prenume...' maxlength='255' />
+      </div>
+      <label class='col-2 control-label'>CNP*</label>
+      <div class='col-9'>
+        <input [(ngModel)]='modal.cnp' class='form-control' placeholder='CNP...' maxlength='13' />
+      </div>
+      <label class='col-2 control-label'>Varsta*</label>
+      <div class='col-9'>
+        <input type='number' [(ngModel)]='modal.age' class='form-control' placeholder='Varsta...' maxlength="3" />
+      </div>
+    </div> -->
+  </div>
+  
+  <div class='modal-footer'>
+    <button type='button' class='btn btn-outline-dark' (click)='activeModal.dismiss()'>Renunță</button>
+    <button type='button' class='btn btn-success' (click)='save()'>Salvează</button>
+  </div>
