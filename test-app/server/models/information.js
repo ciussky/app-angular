@@ -10,7 +10,7 @@ module.exports = (sequelize, DataType) => {
       type: DataType.BOOLEAN
     }
   }, {
-    timestamps: true
+    timestamps: false
   });
   /*
     Aceasta linie este comentata pentru a demonstra legatura dintre tabelul Information si tabelul Post prin id

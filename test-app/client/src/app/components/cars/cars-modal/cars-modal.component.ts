@@ -22,7 +22,7 @@ export class CarsModalComponent implements OnInit {
   ngOnInit(): void {
     if (this.id_car) {
       this._spinner.show();
-      axios.get(`/api/cars/${this.id_car}`).then(({ data }) => {
+      axios.get(`/api/car/${this.id_car}`).then(({ data }) => {
         this.modal = data;
         this._spinner.hide();
       }).catch(() => this.toastr.error('Eroare la preluarea persoanelor!'));
@@ -33,13 +33,13 @@ export class CarsModalComponent implements OnInit {
     this._spinner.show();
 
     if (!this.id_car) {
-      axios.post('/api/cars', this.modal).then(() => {
+      axios.post('/api/car', this.modal).then(() => {
         this._spinner.hide();
         this.toastr.success('Persoana a fost salvată cu succes!');
         this.activeModal.close();
       }).catch(() => this.toastr.error('Eroare la salvarea masinii!'));
     } else {
-      axios.put('/api/cars', this.modal).then(() => {
+      axios.put('/api/car', this.modal).then(() => {
         this._spinner.hide();
         this.toastr.success('Masina a fost modificată cu succes!');
         this.activeModal.close();

@@ -27,7 +27,7 @@ export class PersonsComponent implements OnInit {
 
   loadData = (): void => {
     this._spinner.show();
-    axios.get('/api/persons').then(({ data }) => {
+    axios.get('/api/person').then(({ data }) => {
       this.persons = data;
       this._spinner.hide();
     }).catch(() => this.toastr.error('Eroare la preluarea persoanelor!'));
@@ -46,7 +46,7 @@ export class PersonsComponent implements OnInit {
     modalRef.componentInstance.title = `Ștergere persoanei`;
     modalRef.componentInstance.content = `<p class='text-center mt-1 mb-1'>Doriți să ștergeți persoana <b>${person.fname} ${person.lname}?`;
     modalRef.closed.subscribe(() => {
-      axios.delete(`/api/persons/${person.id}`).then(() => {
+      axios.delete(`/api/person/${person.id}`).then(() => {
         this.toastr.success('Persoana a fost ștearsă cu succes!');
         this.loadData();
       }).catch(() => this.toastr.error('Eroare la ștergerea persoanei!'));

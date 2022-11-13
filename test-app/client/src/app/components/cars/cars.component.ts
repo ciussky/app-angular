@@ -27,7 +27,7 @@ export class CarsComponent implements OnInit {
 
   loadData = (): void => {
     this._spinner.show();
-    axios.get('/api/cars').then(({ data }) => {
+    axios.get('/api/car').then(({ data }) => {
       this.cars = data;
       this._spinner.hide();
     }).catch(() => this.toastr.error('Eroare la preluarea masinilor!'));
@@ -47,7 +47,7 @@ export class CarsComponent implements OnInit {
     modalRef.componentInstance.title = `Ștergere masinii`;
     modalRef.componentInstance.content = `<p class='text-center mt-1 mb-1'>Doriți să ștergeți masina <b>${car.make}?`;
     modalRef.closed.subscribe(() => {
-      axios.delete(`/api/cars/${car.id}`).then(() => {
+      axios.delete(`/api/car/${car.id}`).then(() => {
         this.toastr.success('masina a fost ștearsă cu succes!');
         this.loadData();
       }).catch(() => this.toastr.error('Eroare la ștergerea masinii!'));
