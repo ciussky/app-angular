@@ -74,4 +74,14 @@ export class PersonsComponent implements OnInit {
     this.limit = 70;
   }
 
+itemSelected(e:any){
+  console.log(e);
+}
+
+  cars = [
+    { id: 1, make: 'ford' },
+    { id: 2, make: 'toyota' },
+    { id: 3, make: 'mertan' }
+  ];
+
 }
