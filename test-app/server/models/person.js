@@ -1,5 +1,6 @@
+
 module.exports = (sequelize, DataType) => {
-  let model = sequelize.define('Persons', {
+  const model = sequelize.define('Persons', {
     fname: {
       type: DataType.TEXT
     }
@@ -9,6 +10,10 @@ module.exports = (sequelize, DataType) => {
   /*
     Aceasta linie este comentata pentru a demonstra legatura dintre tabelul Information si tabelul Post prin id
   */
-  // model.belongsTo(sequelize.models.Post, {foreignKey: 'id_post', onDelete: 'set null'});
+
+    // model.hasMany(sequelize.mo, {foreignKey: 'id_car', onDelete: 'set null'});
+    // sequelize.models.associate = (models) => {
+    //   model.belongsTo(models., {foreignKey: 'ID'});
+    // };    
   return model;
 };
