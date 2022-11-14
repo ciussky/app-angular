@@ -1,5 +1,3 @@
-const models = require(".");
-
 module.exports = (sequelize, DataType) => {
   const model = sequelize.define('Cars', {
     make: {
@@ -8,20 +6,9 @@ module.exports = (sequelize, DataType) => {
   }, {
     timestamps: false
   });
-  
-  // model.belongsTo(sequelize.models.Persons, {foreignKey: 'id_car', onDelete: 'set null'});
 
-    // model.belongsTo(sequelize.models.Persons, {foreignKey: '', onDelete: 'set null'});
+      model.belongsTo(sequelize.models.Persons, {foreignKey: 'id', as: 'car_id'});
+      sequelize.models.Persons.hasMany(sequelize.models.Cars, {foreignKey: 'car_id'});
 
-    // sequelize.models.associate = (models) => {
-    //   models.Cars.belongsTo(sequelize.models., {foreignKey: 'ID'});
-    // };    
-    // sequelize.models.Cars.belongsTo(sequelize.models.Persons, {foreignKey: 'id_car', onDelete: 'set null'});
-    // sequelize.models.Persons.hasMany(sequelize.models.Cars, {foreignKey: 'id_car', onDelete: 'set null'});
-
-  
-      // model.belongsTo(sequelize.models.Persons, {foreignKey: 'ID', as: 'makeid'});
-
- 
   return model;
 };
