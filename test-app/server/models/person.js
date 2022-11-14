@@ -4,6 +4,10 @@ module.exports = (sequelize, DataType) => {
       type: DataType.TEXT,
       allowNull: true
     },
+    lname: {
+      type: DataType.TEXT,
+      allowNull: true
+    },
     cnp: {
       type: DataType.TEXT,
       allowNull: true

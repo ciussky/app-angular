@@ -5,33 +5,44 @@
   <div class='modal-body'>
     <div class='row'>
       <label class='col-2 control-label'>Nume*</label>
-      <div [formGroup]='validate' class='form-group col-4'>
-        <input [(ngModel)]='modal.fname' class='form-control' placeholder='Nume...' maxlength='255' formControlName="fname" />
+      <div [formGroup]='validate_person' class='form-group col-4'>
+        <input [(ngModel)]='modal.fname' class='form-control' placeholder='numele...' maxlength='255' formControlName="fname" />
         <span class="text-danger"
-        *ngIf="validate.controls['fname'].hasError('required') &&
-        (validate.controls['fname'].dirty ||
-        validate.controls['fname'].touched)"
+        *ngIf="validate_person.controls['fname'].hasError('required') &&
+        (validate_person.controls['fname'].dirty ||
+        validate_person.controls['fname'].touched)"
         >Numele este obligatoriu</span>
+      </div>
+      
+      <label class='col-2 control-label'>Prenume*</label>
+      <div [formGroup]='validate_person' class='form-group col-4'>
+      <input [(ngModel)]='modal.lname' class='form-control' placeholder='prenumele...' maxlength='255' formControlName="lname" />
+      <span class="text-danger"
+      *ngIf="validate_person.controls['lname'].hasError('required') &&
+      (validate_person.controls['lname'].dirty ||
+      validate_person.controls['lname'].touched)"
+      >Prenumele este obligatoriu</span>
       </div>
 
       <label class='col-2 control-label'>CNP*</label>
-      <div [formGroup]='validate' class='form-group col-4'>
+      <div [formGroup]='validate_person' class='form-group col-4'>
         <input [(ngModel)]='modal.cnp' class='form-control' placeholder='CNP...' maxlength='13' formControlName="cnp" />
         <span class="text-danger"
-        *ngIf="validate.controls['cnp'].hasError('required') &&
-        (validate.controls['cnp'].dirty ||
-        validate.controls['cnp'].touched)"
+        *ngIf="validate_person.controls['cnp'].hasError('required') &&
+        (validate_person.controls['cnp'].dirty ||
+        validate_person.controls['cnp'].touched)"
         >CNP-ul este obligatoriu</span>
       </div>
+
       <label class='col-2 control-label'>Varsta*</label>
-      <div class='col-4'>
-        <input type='number' [(ngModel)]='modal.age' class='form-control' placeholder='' maxlength='3' />
+      <div [formGroup]='validate_person' class='form-group col-4'>
+        <input type='number' [(ngModel)]='modal.age' class='form-control' placeholder='varsta...' maxlength='3' formControlName="age" />
+        <span class="text-danger"
+        *ngIf="validate_person.controls['age'].hasError('required') &&
+        (validate_person.controls['age'].dirty ||
+        validate_person.controls['age'].touched)"
+        >Varsta este obligatorie</span>
       </div>
-      <!-- <label class='col-2 control-label'>Prenume*</label>
-      <div class='col-9'>
-        <input [(ngModel)]='modal.lname' class='form-control' placeholder='Prenume...' maxlength='255' />
-      </div>
-    </div> -->
     <label class='col-2 control-label'>Selecteaza masini*</label>
 
     <div class="col-4">
