@@ -33,7 +33,7 @@ export class PersonsModalComponent implements OnInit {
       fname: [null, Validators.compose([Validators.required])],
       lname: [null, Validators.compose([Validators.required])],
       cnp: [null, Validators.compose([Validators.required])],
-      age: [null, Validators.compose([Validators.required])],
+      age: [null,  Validators.compose([Validators.required])]
       });
   }
 
@@ -57,6 +57,9 @@ export class PersonsModalComponent implements OnInit {
       if (month < 0 || (month === 0 && date.getDate() < birthDate.getDate())) {
         personAge--;
       }
+      if(isNaN(personAge)){
+        personAge = null;
+      }
       return personAge;
     }
 
@@ -71,7 +74,7 @@ export class PersonsModalComponent implements OnInit {
           this.updateAge(this.calcAgeFromCnp(this.modal.cnp));
         }
     }
-    
+
     if(this.validate_person.valid){
       this._spinner.show();
       if (!this.id_person) {
