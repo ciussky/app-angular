@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { REPLACE_DIACRITICS } from 'src/app/utils/utils-input';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { isNull } from 'util';
 
 @Component({
   selector: 'app-cars-modal',
@@ -40,7 +41,31 @@ export class CarsModalComponent implements OnInit {
       });
   }
 
+calculateTaxFromCcapacity(ccapacityval: number){
+
+  console.log(ccapacityval);
+  let taxResult;
+  //capacitatea cilindrică < 1500 = 50 lei
+//capacitatea cilindrică > 1500 < 2000 = 100 lei
+//capacitatea cilindrică > 2000 = 200 lei
+if(ccapacityval < 1500){
+  taxResult = 50;
+}
+else if(ccapacityval >= 1500 && ccapacityval <= 2000){
+  taxResult = 100;
+}
+else if(ccapacityval > 2000){
+  taxResult = 200;
+}
+  return taxResult;
+}
+
+updateTax(result: any): void{
+  this.modal.tax = result;
+}
+
   save(): void {
+    this.updateTax(this.calculateTaxFromCcapacity(this.modal.ccapicity));
     if(this.validate_car.valid){
       this._spinner.show();
 

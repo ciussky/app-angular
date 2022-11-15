@@ -6,7 +6,7 @@
     <div class='row'>
       <label class='col-2 control-label'>Marca*</label>
       <div [formGroup]='validate_car' class='form-group col-4'>
-        <input [(ngModel)]='modal.make' class='form-control' placeholder='denumire marca...' maxlength='255' formControlName="make" />
+        <input type='string' [(ngModel)]='modal.make' class='form-control' placeholder='denumire marca...' maxlength='255' formControlName="make" />
         <span class="text-danger"
         *ngIf="validate_car.controls['make'].hasError('required') &&
         (validate_car.controls['make'].dirty ||
@@ -16,7 +16,7 @@
 
       <label class='col-2 control-label'>Model*</label>
       <div [formGroup]='validate_car' class='form-group col-4'>
-        <input [(ngModel)]='modal.model' class='form-control' placeholder='model...' maxlength='255' formControlName="model" />
+        <input type='string' [(ngModel)]='modal.model' class='form-control' placeholder='model...' maxlength='255' formControlName="model" />
         <span class="text-danger"
         *ngIf="validate_car.controls['model'].hasError('required') &&
         (validate_car.controls['model'].dirty ||
@@ -26,7 +26,7 @@
 
       <label class='col-2 control-label'>Anul Fabricatiei*</label>
       <div [formGroup]='validate_car' class='form-group col-4'>
-        <input [(ngModel)]='modal.makeyear' class='form-control' placeholder='anul fabricatiei...' maxlength='255' formControlName="makeyear" />
+        <input type='number' [(ngModel)]='modal.makeyear' class='form-control' placeholder='anul fabricatiei...' maxlength='4' formControlName="makeyear" />
         <span class="text-danger"
         *ngIf="validate_car.controls['makeyear'].hasError('required') &&
         (validate_car.controls['makeyear'].dirty ||
@@ -36,7 +36,7 @@
 
       <label class='col-2 control-label'>Capacitate Cilindrica*</label>
       <div [formGroup]='validate_car' class='form-group col-4'>
-        <input [(ngModel)]='modal.ccapicity' class='form-control' placeholder='capacitate cilindrica...' maxlength='255' formControlName="ccapicity" />
+        <input type='number' [(ngModel)]='modal.ccapicity' class='form-control' placeholder='capacitate cilindrica...' maxlength='4' formControlName="ccapicity" />
         <span class="text-danger"
         *ngIf="validate_car.controls['ccapicity'].hasError('required') &&
         (validate_car.controls['ccapicity'].dirty ||
@@ -46,7 +46,7 @@
 
       <label class='col-2 control-label'>Taxa De Impozit*</label>
       <div [formGroup]='validate_car' class='form-group col-4'>
-        <input [(ngModel)]='modal.tax' class='form-control' placeholder='taxa...' maxlength='255' formControlName="tax" />
+        <input type='number' [(ngModel)]='modal.tax' class='form-control' placeholder='taxa...' maxlength='4' formControlName="tax" />
         <span class="text-danger"
         *ngIf="validate_car.controls['tax'].hasError('required') &&
         (validate_car.controls['tax'].dirty ||

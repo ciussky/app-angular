@@ -9,15 +9,15 @@ module.exports = (sequelize, DataType) => {
       allowNull: true
     },
     makeyear: {
-      type: DataType.TEXT,
+      type: DataType.INTEGER,
       allowNull: true
     },
     ccapicity: {
-      type: DataType.TEXT,
+      type: DataType.INTEGER,
       allowNull: true
     },
     tax: {
-      type: DataType.TEXT,
+      type: DataType.INTEGER,
       allowNull: true
     }
   }, {
