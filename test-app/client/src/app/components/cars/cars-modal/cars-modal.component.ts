@@ -42,8 +42,6 @@ export class CarsModalComponent implements OnInit {
   }
 
 calculateTaxFromCcapacity(ccapacityval: number){
-
-  console.log(ccapacityval);
   let taxResult;
   //capacitatea cilindrică < 1500 = 50 lei
 //capacitatea cilindrică > 1500 < 2000 = 100 lei
