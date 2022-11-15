@@ -45,7 +45,7 @@ export class CarsComponent implements OnInit {
   delete = (car: any): void => {
     const modalRef = this._modal.open(ConfirmDialogComponent, {size: 'lg', keyboard: false, backdrop: 'static'});
     modalRef.componentInstance.title = `Ștergere masinii`;
-    modalRef.componentInstance.content = `<p class='text-center mt-1 mb-1'>Doriți să ștergeți masina <b>${car.make}?`;
+    modalRef.componentInstance.content = `<p class='text-center mt-1 mb-1'>Doriți să ștergeți masina <b>${car.make} ${car.model}?`;
     modalRef.closed.subscribe(() => {
       axios.delete(`/api/car/${car.id}`).then(() => {
         this.toastr.success('masina a fost ștearsă cu succes!');
