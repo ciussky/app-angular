@@ -24,8 +24,7 @@ module.exports = (sequelize, DataType) => {
     timestamps: false
   });
 
-      model.belongsTo(sequelize.models.Persons, {foreignKey: 'id', as: 'car_id'});
-      sequelize.models.Persons.hasMany(sequelize.models.Cars, {foreignKey: 'car_id'});
-
   return model;
 };
+
+

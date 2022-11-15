@@ -59,7 +59,6 @@ export class PersonsModalComponent implements OnInit {
       }
       return personAge;
     }
-  
 
   updateAge(result: any): void{
     this.modal.age = result;
