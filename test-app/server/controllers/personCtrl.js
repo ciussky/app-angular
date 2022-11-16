@@ -1,8 +1,13 @@
 module.exports = db => {
   return {
     create: (req, res) => {
-      db.models.Persons.create(req.body).then(() => {
+      db.models.Persons.create(req.body).then((event) => {
         res.send({ success: true });
+
+      db.query(`INSERT INTO "Junction"(id_person, id_car) VALUES(${event.id},${req.body.ngSelected[0]})`, { type: db.QueryTypes.SELECT }).then(resp => {
+        res.send({ success:  true });
+      }).catch(() => res.status(401));
+ 
       }).catch(() => res.status(401));
     },
 
@@ -13,9 +18,7 @@ module.exports = db => {
     },
 
     findAll: (req, res) => {
-      db.query(`SELECT id, fname, lname, cnp, age
-      FROM "Persons"
-      ORDER BY id`, { type: db.QueryTypes.SELECT }).then(resp => {
+      db.query(`SELECT * FROM "Persons" LEFT JOIN "Junction" ON "Persons".id = "id_person" LEFT JOIN "Cars" on "Cars".id = "id_car"`, { type: db.QueryTypes.SELECT }).then(resp => {
         res.send(resp);
       }).catch(() => res.status(401));
     },

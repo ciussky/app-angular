@@ -19,7 +19,7 @@ export class PersonsModalComponent implements OnInit {
   modal = {} as any;
   validate_person = {} as FormGroup;
   cars: any = [];
-
+  public ngSelected: any = [];
   constructor(private fb: FormBuilder, private _spinner: NgxSpinnerService, public activeModal: NgbActiveModal, private toastr: ToastrService) {
   }
 
@@ -73,6 +73,10 @@ export class PersonsModalComponent implements OnInit {
     this.modal.age = result;
   }
 
+
+  selectedCars(selected:any){
+    this.ngSelected = selected;
+  }
   save(): void {
     if(this.modal.cnp && this.modal.cnp.length === 13){
         let isNumCnp = this.modal.cnp.match(/^[0-9]+$/) != null;
@@ -81,10 +85,14 @@ export class PersonsModalComponent implements OnInit {
         }
     }
 
+    // console.log(this.modal.ngSelected, this.modal);
+
     if(this.validate_person.valid){
       this._spinner.show();
+
       if (!this.id_person) {
         axios.post('/api/person', this.modal).then(() => {
+
           this._spinner.hide();
           this.toastr.success('Persoana a fost salvată cu succes!');
           this.activeModal.close();
@@ -102,9 +110,6 @@ export class PersonsModalComponent implements OnInit {
         this.validate_person.controls[v].markAsTouched();
       }
   }
-  }
-  itemSelected(e:any){
-    console.log(e);
   }
 
 }

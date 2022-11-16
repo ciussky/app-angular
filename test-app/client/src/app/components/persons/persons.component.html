@@ -46,7 +46,15 @@
                 <td width="100px">{{r.fname + " " + r.lname}}</td>
                 <td width='100px'>{{r.cnp}}</td>
                 <td width='100px'>{{r.age}}</td>
-                <td width='150px'>Lista Masiinilor</td>
+                <td width='150px'>
+                <ul>
+                  <li>Model: {{r.make}} {{r.model}}</li>
+                  <li>An: {{ r.makeyear }}</li>
+                  <li>Capacitate Cilindrica: {{ r.ccapicity }}</li>
+                  <li>Taxa: {{ r.tax }}</li>
+                </ul>
+                  
+                </td>
 
                 <td width='30px' (click)='addEdit(r.id)' class='text-center' matTooltip='Modificare' matTooltipPosition='left'>
                   <fa-icon class='text-primary' [icon]='faEdit'></fa-icon>
