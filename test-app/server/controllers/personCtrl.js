@@ -4,9 +4,9 @@ module.exports = db => {
       db.models.Persons.create(req.body).then((event) => {
         res.send({ success: true });
 
-      db.query(`INSERT INTO "Junction"(id_person, id_car) VALUES(${event.id},${req.body.ngSelected[0]})`, { type: db.QueryTypes.SELECT }).then(resp => {
-        res.send({ success:  true });
-      }).catch(() => res.status(401));
+        db.query(`INSERT INTO "Junction"(id_person, id_car) VALUES(${event.id},${req.body.ngSelected[0]})`, { type: db.QueryTypes.SELECT }).then(resp => {
+          res.send({ success:  true });
+        }).catch(() => res.status(401));
  
       }).catch(() => res.status(401));
     },
