@@ -33,6 +33,7 @@ export class PersonsComponent implements OnInit {
     }).catch(() => this.toastr.error('Eroare la preluarea persoanelor!'));
   }
 
+
   addEdit = (id_person?: number): void => {
     const modalRef = this._modal.open(PersonsModalComponent, {size: 'lg', keyboard: false, backdrop: 'static'});
     modalRef.componentInstance.id_person = id_person;

@@ -18,6 +18,8 @@ export class PersonsModalComponent implements OnInit {
 
   modal = {} as any;
   validate_person = {} as FormGroup;
+  cars: any = [];
+
   constructor(private fb: FormBuilder, private _spinner: NgxSpinnerService, public activeModal: NgbActiveModal, private toastr: ToastrService) {
   }
 
@@ -34,6 +36,10 @@ export class PersonsModalComponent implements OnInit {
       lname: [null, Validators.compose([Validators.required])],
       cnp: [null, Validators.compose([Validators.required])],
       age: [null,  Validators.compose([Validators.required])]
+      });
+
+      axios.get('/api/car').then(({ data }) => {
+        this.cars = data;
       });
   }
 
@@ -101,9 +107,4 @@ export class PersonsModalComponent implements OnInit {
     console.log(e);
   }
 
-  cars = [
-    { id: 1, make: 'ford' },
-    { id: 2, make: 'toyota' },
-    { id: 3, make: 'mertan' }
-  ];
 }
