@@ -1,21 +1,19 @@
 module.exports = db => {
   return {
     create: async (req, res) => {
-      let selectedCars = req.body.ngSelected;
       let junction = [];
       let createdPerson = await db.models.Persons.create(req.body).catch(() => res.status(401));
-
-      res.send({ success: true });
-
-      if(selectedCars.length > 0){
-        selectedCars.forEach(s => {
+      const hasCars = req.body.hasOwnProperty('ngSelected');
+      if(hasCars){
+        req.body.ngSelected.forEach(s => {
           junction.push({
             id_car: s,
             id_person: createdPerson.id
-          });
-        });
+          })
+        })
       }
- 
+      res.send({ success: true });
+
 
       await db.models.Junction.bulkCreate(junction).catch(() => res.status(401));
     },
@@ -26,7 +24,7 @@ module.exports = db => {
     },
 
     findAll: (req, res) => {
-      db.query(`SELECT * FROM "Persons" LEFT JOIN "Junction" ON "Persons".id = "id_person" LEFT JOIN "Cars" on "Cars".id = "id_car"`, { type: db.QueryTypes.SELECT }).then(resp => {
+      db.query(`SELECT * FROM "Persons" LEFT JOIN "Junction" ON "Persons".id = "id_person" LEFT JOIN "Cars" on "Cars".id = "id_car" ORDER BY "Persons".id`, { type: db.QueryTypes.SELECT }).then(resp => {
         res.send(resp);
       }).catch(() => res.status(401));
     },
