@@ -1,20 +1,28 @@
 module.exports = db => {
   return {
-    create: (req, res) => {
-      db.models.Persons.create(req.body).then((event) => {
-        res.send({ success: true });
+    create: async (req, res) => {
+      let selectedCars = req.body.ngSelected;
+      let junction = [];
+      let createdPerson = await db.models.Persons.create(req.body).catch(() => res.status(401));
 
-        db.query(`INSERT INTO "Junction"(id_person, id_car) VALUES(${event.id},${req.body.ngSelected[0]})`, { type: db.QueryTypes.SELECT }).then(resp => {
-          res.send({ success:  true });
-        }).catch(() => res.status(401));
+      res.send({ success: true });
+
+      if(selectedCars.length > 0){
+        selectedCars.forEach(s => {
+          junction.push({
+            id_car: s,
+            id_person: createdPerson.id
+          });
+        });
+      }
  
-      }).catch(() => res.status(401));
+
+      await db.models.Junction.bulkCreate(junction).catch(() => res.status(401));
     },
 
-    update: (req, res) => {
-      db.models.Persons.update(req.body, { where: { id: req.body.id } }).then(() => {
-        res.send({ success: true })
-      }).catch(() => res.status(401));
+    update: async (req, res) => {
+      await db.models.Persons.update(req.body, { where: { id: req.body.id } }).catch(() => res.status(401));
+        res.send({ success: req.body.id })
     },
 
     findAll: (req, res) => {
