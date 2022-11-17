@@ -11,16 +11,14 @@ module.exports = db => {
             id_person: createdPerson.id
           })
         })
+        await db.models.Junction.bulkCreate(junction).catch(() => res.status(401));
       }
       res.send({ success: true });
-
-
-      await db.models.Junction.bulkCreate(junction).catch(() => res.status(401));
     },
 
     update: async (req, res) => {
       await db.models.Persons.update(req.body, { where: { id: req.body.id } }).catch(() => res.status(401));
-        res.send({ success: req.body.id })
+        res.send({ success: true })
     },
 
     findAll: (req, res) => {
