@@ -1,12 +1,12 @@
 module.exports = (sequelize) => {
   const model = sequelize.define(
-    "Junction",
+    "Junctions",
     {},
-    { timestamps: false }
+    { timestamps: false },
   );
 
-  sequelize.models.Persons.belongsToMany(sequelize.models.Cars, {through:model, foreignKey: 'id_person', onDelete: 'set null' });
-  sequelize.models.Cars.belongsToMany(sequelize.models.Persons, {through:model, foreignKey: 'id_car', onDelete: 'set null' });
-  
+  sequelize.models.Persons.belongsToMany(sequelize.models.Cars, {as: 'cars', through:model, foreignKey: 'id_person', onDelete: 'cascade' });
+  sequelize.models.Cars.belongsToMany(sequelize.models.Persons, {as: 'persons', through:model, foreignKey: 'id_car', onDelete: 'cascade' });
+  // sequelize.sync({ logging: console.log });
   return model;
 };

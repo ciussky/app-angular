@@ -11,22 +11,22 @@ module.exports = db => {
             id_person: createdPerson.id
           })
         })
-        await db.models.Junction.bulkCreate(junction).catch(() => res.status(401));
+        await db.models.Junctions.bulkCreate(junction).catch(() => res.status(401));
       }
       res.send({ success: true });
     },
 
     update: async (req, res) => {
-      await db.models.Persons.update(req.body, { where: { id: req.body.id } }).catch(() => res.status(401));
+      db.models.Persons.update(req.body, { where: { id: req.body.id } }).then(() => {
         res.send({ success: true })
-    },
-
-    findAll: (req, res) => {
-      db.query(`SELECT * FROM "Persons" LEFT JOIN "Junction" ON "Persons".id = "id_person" LEFT JOIN "Cars" on "Cars".id = "id_car" ORDER BY "Persons".id`, { type: db.QueryTypes.SELECT }).then(resp => {
-        res.send(resp);
       }).catch(() => res.status(401));
     },
 
+    findAll: async (req, res) => {
+      await db.models.Persons.findAll({ include: {association: 'cars'}}).then(resp => {
+        res.send(resp);
+      })
+    },
     find: (req, res) => {
       db.query(`SELECT id, fname, lname, cnp, age
       FROM "Persons"`, { type: db.QueryTypes.SELECT }).then(resp => {
@@ -35,9 +35,13 @@ module.exports = db => {
     },
 
     destroy: (req, res) => {
-      db.query(`DELETE FROM "Persons" WHERE id = ${req.params.id}`, { type: db.QueryTypes.DELETE }).then(() => {
-        res.send({ success: true });
+      // db.query(`DELETE FROM "Persons" WHERE id = ${req.params.id}`, { type: db.QueryTypes.DELETE }).then(() => {
+      //   res.send({ success: req.params.id });
+      // }).catch(() => res.status(401));
+
+      db.models.Persons.destroy({where: { id: req.params.id }}).then(() => {
+        res.send({ success: req.body.id });
       }).catch(() => res.status(401));
     }
-  };
+  }
 };

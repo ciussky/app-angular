@@ -47,11 +47,11 @@
                 <td width='100px'>{{r.cnp}}</td>
                 <td width='100px'>{{r.age}}</td>
                 <td width='150px'>
-                <ul>
-                  <li>Model: {{r.make}} {{r.model}}</li>
-                  <li>An: {{ r.makeyear }}</li>
-                  <li>Capacitate Cilindrica: {{ r.ccapicity }}</li>
-                  <li>Taxa: {{ r.tax }}</li>
+                <ul *ngFor='let car of cars'>
+                  <li>Model: {{car.make}} {{car.model}}</li>
+                  <li>An: {{ car.makeyear }}</li>
+                  <li>Capacitate Cilindrica: {{ car.ccapicity }}</li>
+                  <li>Taxa: {{ car.tax }}</li>
                 </ul>
                   
                 </td>

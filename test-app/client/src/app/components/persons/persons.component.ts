@@ -18,6 +18,7 @@ export class PersonsComponent implements OnInit {
   faTrashAlt = faTrashAlt; faEdit = faEdit; faChevronUp = faChevronUp; faPlus = faPlus;
   limit: number = 70; showBackTop: string = '';
   persons: any = [];
+  cars: any= [];
   constructor(private _modal: NgbModal, private _spinner: NgxSpinnerService, private toastr: ToastrService) { SET_HEIGHT('view', 20, 'height'); }
 
 
@@ -29,8 +30,12 @@ export class PersonsComponent implements OnInit {
     this._spinner.show();
     axios.get('/api/person').then(({ data }) => {
       this.persons = data;
+
+      if(this.persons[0]){
+        this.cars = this.persons[0].cars;
+      }
       this._spinner.hide();
-    }).catch(() => this.toastr.error('Eroare la preluarea persoanelor!'));
+    }).catch((error) => this.toastr.error(error.message));
   }
 
 
