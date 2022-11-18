@@ -17,31 +17,22 @@ module.exports = db => {
     },
 
     update: async (req, res) => {
-      db.models.Persons.update(req.body, { where: { id: req.body.id } }).then(() => {
-        res.send({ success: true })
-      }).catch(() => res.status(401));
+      const updatePerson = await db.models.Persons.update(req.body, { where: { id: req.body.id } }).catch(() => res.status(401));
+      res.send({ success: true });
     },
 
     findAll: async (req, res) => {
-      await db.models.Persons.findAll({ include: {association: 'cars'}}).then(resp => {
-        res.send(resp);
-      })
+      const findPersons = await db.models.Persons.findAll({ include: {association: 'cars'}}).catch(() => res.status(401));
+        res.send(findPersons);
     },
-    find: (req, res) => {
-      db.query(`SELECT id, fname, lname, cnp, age
-      FROM "Persons"`, { type: db.QueryTypes.SELECT }).then(resp => {
-        res.send(resp[0]);
-      }).catch(() => res.status(401));
+    find: async (req, res) => {
+      const editPerson = await db.models.Persons.findOne({ where: { id: req.params.id}}).catch(() => res.status(401));
+      res.send(editPerson);
     },
 
-    destroy: (req, res) => {
-      // db.query(`DELETE FROM "Persons" WHERE id = ${req.params.id}`, { type: db.QueryTypes.DELETE }).then(() => {
-      //   res.send({ success: req.params.id });
-      // }).catch(() => res.status(401));
-
-      db.models.Persons.destroy({where: { id: req.params.id }}).then(() => {
-        res.send({ success: req.body.id });
-      }).catch(() => res.status(401));
+    destroy: async (req, res) => {
+      const deletePerson = await db.models.Persons.destroy({where: { id: req.params.id }}).catch(() => res.status(401));
+        res.send({success: deletePerson});
     }
   }
 };

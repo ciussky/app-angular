@@ -19,5 +19,8 @@ module.exports = (sequelize, DataType) => {
   }, {
     timestamps: false
   });
+
+  // sequelize.sync({ logging: console.log, where: { id: 1 } });
+
   return model;
 };
