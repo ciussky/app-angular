@@ -6,9 +6,9 @@
     <div class='row'>
       <label class='col-2 control-label'>Nume*</label>
       <div [formGroup]='validate_person' class='form-group col-4'>
-        <input [(ngModel)]='modal.fname' class='form-control' placeholder='numele...' type='string' maxlength='255' formControlName="fname" />
+        <input [(ngModel)]='modal.fname' [ngClass]="{'is-invalid':submitted && validate_person.controls['fname'].hasError('required')}" class='form-control' placeholder='numele...' type='string' maxlength='255' formControlName="fname" />
         <span class="text-danger"
-        *ngIf="validate_person.controls['fname'].hasError('required') &&
+        *ngIf="submitted && validate_person.controls['fname'].hasError('required') &&
         (validate_person.controls['fname'].dirty ||
         validate_person.controls['fname'].touched)"
         >Numele este obligatoriu</span>
@@ -16,9 +16,9 @@
       
       <label class='col-2 control-label'>Prenume*</label>
       <div [formGroup]='validate_person' class='form-group col-4'>
-      <input [(ngModel)]='modal.lname' class='form-control' placeholder='prenumele...' type='string' maxlength='255' formControlName="lname" />
+      <input [(ngModel)]='modal.lname' [ngClass]="{'is-invalid':submitted && validate_person.controls['lname'].hasError('required')}" class='form-control' placeholder='prenumele...' type='string' maxlength='255' formControlName="lname" />
       <span class="text-danger"
-      *ngIf="validate_person.controls['lname'].hasError('required') &&
+      *ngIf="submitted && validate_person.controls['lname'].hasError('required') &&
       (validate_person.controls['lname'].dirty ||
       validate_person.controls['lname'].touched)"
       >Prenumele este obligatoriu</span>
@@ -26,9 +26,9 @@
 
       <label class='col-2 control-label'>CNP*</label>
       <div [formGroup]='validate_person' class='form-group col-4'>
-        <input [(ngModel)]='modal.cnp' class='form-control' placeholder='CNP...' type='string' maxlength='13' formControlName="cnp" />
+        <input [(ngModel)]='modal.cnp' [ngClass]="{'is-invalid':submitted && validate_person.controls['cnp'].hasError('required')}" class='form-control' placeholder='CNP...' type='string' maxlength='13' formControlName="cnp" />
         <span class="text-danger"
-        *ngIf="validate_person.controls['cnp'].hasError('required') &&
+        *ngIf="submitted && validate_person.controls['cnp'].hasError('required') &&
         (validate_person.controls['cnp'].dirty ||
         validate_person.controls['cnp'].touched)"
         >CNP-ul este obligatoriu</span>
@@ -36,9 +36,9 @@
 
       <label class='col-2 control-label'>Varsta*</label>
       <div [formGroup]='validate_person' class='form-group col-4'>
-        <input type='number' [(ngModel)]='modal.age' class='form-control' placeholder='varsta...' maxlength='3' formControlName="age" />
+        <input type='number' [(ngModel)]='modal.age' [ngClass]="{'is-invalid':submitted && validate_person.controls['age'].hasError('required')}" class='form-control' placeholder='varsta...' maxlength='3' formControlName="age" />
         <span class="text-danger"
-        *ngIf="validate_person.controls['age'].hasError('required') &&
+        *ngIf="submitted && validate_person.controls['age'].hasError('required') &&
         (validate_person.controls['age'].dirty ||
         validate_person.controls['age'].touched)"
         >Varsta este obligatorie</span>

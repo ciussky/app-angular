@@ -18,7 +18,7 @@ export class CarsModalComponent implements OnInit {
 
   modal = {} as any;
   validate_car = {} as FormGroup;
-
+  submitted = false;
 
   constructor(private fb: FormBuilder, private _spinner: NgxSpinnerService, public activeModal: NgbActiveModal, private toastr: ToastrService) {
   }
@@ -33,11 +33,11 @@ export class CarsModalComponent implements OnInit {
     }
 
     this.validate_car = this.fb.group({
-      make: [null, Validators.compose([Validators.required])],
-      model: [null, Validators.compose([Validators.required])],
-      makeyear: [null, Validators.compose([Validators.required])],
-      ccapicity: [null, Validators.compose([Validators.required])],
-      tax: [null, Validators.compose([Validators.required])]
+      make: ['', Validators.required],
+      model: ['', Validators.required],
+      makeyear: ['', Validators.required],
+      ccapicity: ['', Validators.required],
+      tax: ['', Validators.required]
       });
   }
 
@@ -82,6 +82,7 @@ updateTax(result: any): void{
     }
     }
     else{
+      this.submitted = true;
       for (let v in this.validate_car.controls) {
         this.validate_car.controls[v].markAsTouched();
       }

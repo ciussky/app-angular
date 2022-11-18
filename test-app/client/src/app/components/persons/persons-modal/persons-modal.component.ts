@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { REPLACE_DIACRITICS } from 'src/app/utils/utils-input';
 import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators, FormArray, NgModel } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-persons-modal',
@@ -17,9 +17,11 @@ export class PersonsModalComponent implements OnInit {
   @Input() id_person: number | undefined;
 
   modal = {} as any;
-  validate_person = {} as FormGroup;
+  validate_person!: FormGroup;
   cars: any = [];
   public ngSelected: any = [];
+  submitted = false;
+
   constructor(private fb: FormBuilder, private _spinner: NgxSpinnerService, public activeModal: NgbActiveModal, private toastr: ToastrService) {
   }
 
@@ -32,62 +34,60 @@ export class PersonsModalComponent implements OnInit {
       }).catch(() => this.toastr.error('Eroare la preluarea persoanelor!'));
     }
     this.validate_person = this.fb.group({
-      fname: [null, Validators.compose([Validators.required])],
-      lname: [null, Validators.compose([Validators.required])],
-      cnp: [null, Validators.compose([Validators.required])],
-      age: [null,  Validators.compose([Validators.required])]
-      });
-
-      axios.get('/api/car').then(({ data }) => {
-        this.cars = data;
-      });
+      fname: ['', Validators.required],
+      lname: ['', Validators.required],
+      cnp: ['', Validators.required],
+      age: ['', Validators.required]
+    });
+    axios.get('/api/car').then(({ data }) => {
+      this.cars = data;
+    });
   }
 
-  calcAgeFromCnp(cnpval: string){
-      let personAge;
-      const getBirthdate = this.modal.cnp.split("");
-      getBirthdate.splice(0, 1);
-      getBirthdate.splice(6, 10);
-    
-      const birthYear = getBirthdate.splice(0, 2).join("");
-      const birthMonth = getBirthdate.splice(0, 2).join("");
-      const birthDay = getBirthdate.join("");
-      const fullBirthYear = 19 + '' + birthYear;
-      const yymmdd = fullBirthYear + "/" + birthMonth + "/" + birthDay;
+  calcAgeFromCnp(cnpval: string) {
+    let personAge;
+    const getBirthdate = this.modal.cnp.split("");
+    getBirthdate.splice(0, 1);
+    getBirthdate.splice(6, 10);
 
-      // this.modal.cnp = 1900617555555;
-      const date = new Date();
-      const birthDate = new Date(yymmdd);
-      personAge = date.getFullYear() - birthDate.getFullYear();
-      const month = date.getMonth() - birthDate.getMonth();
-      if (month < 0 || (month === 0 && date.getDate() < birthDate.getDate())) {
-        personAge--;
-      }
-      if(isNaN(personAge)){
-        personAge = null;
-      }
-      return personAge;
+    const birthYear = getBirthdate.splice(0, 2).join("");
+    const birthMonth = getBirthdate.splice(0, 2).join("");
+    const birthDay = getBirthdate.join("");
+    const fullBirthYear = 19 + '' + birthYear;
+    const yymmdd = fullBirthYear + "/" + birthMonth + "/" + birthDay;
+
+    // this.modal.cnp = 1900617555555;
+    const date = new Date();
+    const birthDate = new Date(yymmdd);
+    personAge = date.getFullYear() - birthDate.getFullYear();
+    const month = date.getMonth() - birthDate.getMonth();
+    if (month < 0 || (month === 0 && date.getDate() < birthDate.getDate())) {
+      personAge--;
     }
+    if (isNaN(personAge)) {
+      personAge = null;
+    }
+    return personAge;
+  }
 
-  updateAge(result: any): void{
+  updateAge(result: any): void {
     this.modal.age = result;
   }
 
 
-  selectedCars(selected:any){
+  selectedCars(selected: any) {
     this.ngSelected = selected;
   }
+  
   save(): void {
-    if(this.modal.cnp && this.modal.cnp.length === 13){
-        let isNumCnp = this.modal.cnp.match(/^[0-9]+$/) != null;
-        if(isNumCnp){
-          this.updateAge(this.calcAgeFromCnp(this.modal.cnp));
-        }
+    if (this.modal.cnp && this.modal.cnp.length === 13) {
+      let isNumCnp = this.modal.cnp.match(/^[0-9]+$/) != null;
+      if (isNumCnp) {
+        this.updateAge(this.calcAgeFromCnp(this.modal.cnp));
+      }
     }
 
-    // console.log(this.modal.ngSelected, this.modal);
-
-    if(this.validate_person.valid){
+    if (this.validate_person.valid) {
       this._spinner.show();
 
       if (!this.id_person) {
@@ -105,11 +105,11 @@ export class PersonsModalComponent implements OnInit {
         }).catch(() => this.toastr.error('Eroare la modificarea persoanei!'));
       }
     }
-    else{
+    else {
+      this.submitted = true;
       for (let v in this.validate_person.controls) {
         this.validate_person.controls[v].markAsTouched();
       }
+    }
   }
-  }
-
 }

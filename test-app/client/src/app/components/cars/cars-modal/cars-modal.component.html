@@ -6,9 +6,9 @@
     <div class='row'>
       <label class='col-2 control-label'>Marca*</label>
       <div [formGroup]='validate_car' class='form-group col-4'>
-        <input type='string' [(ngModel)]='modal.make' class='form-control' placeholder='denumire marca...' maxlength='255' formControlName="make" />
+        <input type='string' [(ngModel)]='modal.make' [ngClass]="{'is-invalid':submitted && validate_car.controls['make'].hasError('required')}" class='form-control' placeholder='denumire marca...' maxlength='255' formControlName="make" />
         <span class="text-danger"
-        *ngIf="validate_car.controls['make'].hasError('required') &&
+        *ngIf="submitted && validate_car.controls['make'].hasError('required') &&
         (validate_car.controls['make'].dirty ||
         validate_car.controls['make'].touched)"
         >Marca masinii este obligatorie...</span>
@@ -16,9 +16,9 @@
 
       <label class='col-2 control-label'>Model*</label>
       <div [formGroup]='validate_car' class='form-group col-4'>
-        <input type='string' [(ngModel)]='modal.model' class='form-control' placeholder='model...' maxlength='255' formControlName="model" />
+        <input type='string' [(ngModel)]='modal.model' [ngClass]="{'is-invalid':submitted && validate_car.controls['model'].hasError('required')}" class='form-control' placeholder='model...' maxlength='255' formControlName="model" />
         <span class="text-danger"
-        *ngIf="validate_car.controls['model'].hasError('required') &&
+        *ngIf="submitted && validate_car.controls['model'].hasError('required') &&
         (validate_car.controls['model'].dirty ||
         validate_car.controls['model'].touched)"
         >Modelul masinii este obligatoriu...</span>
@@ -26,9 +26,9 @@
 
       <label class='col-2 control-label'>Anul Fabricatiei*</label>
       <div [formGroup]='validate_car' class='form-group col-4'>
-        <input type='number' [(ngModel)]='modal.makeyear' class='form-control' placeholder='anul fabricatiei...' maxlength='4' formControlName="makeyear" />
+        <input type='number' [(ngModel)]='modal.makeyear' [ngClass]="{'is-invalid':submitted && validate_car.controls['makeyear'].hasError('required')}" class='form-control' placeholder='anul fabricatiei...' maxlength='4' formControlName="makeyear" />
         <span class="text-danger"
-        *ngIf="validate_car.controls['makeyear'].hasError('required') &&
+        *ngIf="submitted && validate_car.controls['makeyear'].hasError('required') &&
         (validate_car.controls['makeyear'].dirty ||
         validate_car.controls['makeyear'].touched)"
         >Anul fabricatie este obligatoriu...</span>
@@ -36,9 +36,9 @@
 
       <label class='col-2 control-label'>Capacitate Cilindrica*</label>
       <div [formGroup]='validate_car' class='form-group col-4'>
-        <input type='number' [(ngModel)]='modal.ccapicity' class='form-control' placeholder='capacitate cilindrica...' maxlength='4' formControlName="ccapicity" />
+        <input type='number' [(ngModel)]='modal.ccapicity' [ngClass]="{'is-invalid':submitted && validate_car.controls['ccapicity'].hasError('required')}" class='form-control' placeholder='capacitate cilindrica...' maxlength='4' formControlName="ccapicity" />
         <span class="text-danger"
-        *ngIf="validate_car.controls['ccapicity'].hasError('required') &&
+        *ngIf="submitted && validate_car.controls['ccapicity'].hasError('required') &&
         (validate_car.controls['ccapicity'].dirty ||
         validate_car.controls['ccapicity'].touched)"
         >Capacitate cilindrica este obligatorie...</span>
@@ -46,9 +46,9 @@
 
       <label class='col-2 control-label'>Taxa De Impozit*</label>
       <div [formGroup]='validate_car' class='form-group col-4'>
-        <input type='number' [(ngModel)]='modal.tax' class='form-control' placeholder='taxa...' maxlength='4' formControlName="tax" />
+        <input type='number' [(ngModel)]='modal.tax' [ngClass]="{'is-invalid':submitted && validate_car.controls['tax'].hasError('required')}" class='form-control' placeholder='taxa...' maxlength='4' formControlName="tax" />
         <span class="text-danger"
-        *ngIf="validate_car.controls['tax'].hasError('required') &&
+        *ngIf="submitted && validate_car.controls['tax'].hasError('required') &&
         (validate_car.controls['tax'].dirty ||
         validate_car.controls['tax'].touched)"
         >Taxa este obligatorie...</span>
