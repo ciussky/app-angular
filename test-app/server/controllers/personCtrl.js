@@ -32,7 +32,7 @@ module.exports = db => {
 
     destroy: async (req, res) => {
       const deletePerson = await db.models.Persons.destroy({where: { id: req.params.id }}).catch(() => res.status(401));
-        res.send({success: deletePerson});
+        res.send({success: true});
     }
   }
 };
