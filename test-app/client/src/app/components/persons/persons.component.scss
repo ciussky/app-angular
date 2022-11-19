@@ -1,3 +1,9 @@
 .table td{
     vertical-align: top !important;
 }
+
+.list-car.list-group .list-group-item:nth-child(1){
+    background-color: #777;
+    color: #fff;
+    border-radius: unset;
+}

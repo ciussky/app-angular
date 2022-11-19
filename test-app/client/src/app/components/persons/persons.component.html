@@ -46,12 +46,10 @@
                 <td width='100px'>{{r.cnp}}</td>
                 <td width='100px'>{{r.age}}</td>
                 <td width='150px'>
-                <ul *ngFor='let car of r.cars'>
-                  <li>Model: {{car.make}} {{car.model}}</li>
-                  <li>An: {{ car.makeyear }}</li>
-                  <li>Capacitate Cilindrica: {{ car.ccapicity }}</li>
-                  <li>Taxa: {{ car.tax }}</li>
-                  <hr>
+                <ul class = "list-car list-group" *ngFor='let car of r.cars'>
+                  <li class="list-group-item">Model: {{car.make}} {{car.model}} | Anul: {{ car.makeyear }}</li>
+                  <li class="list-group-item">Capacitate Cilindrica: {{ car.ccapicity }}</li>
+                  <li class="list-group-item">Taxa: {{ car.tax }}</li>
                 </ul>
                   
                 </td>
