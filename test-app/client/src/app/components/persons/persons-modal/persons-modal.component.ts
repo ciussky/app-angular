@@ -5,7 +5,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { REPLACE_DIACRITICS } from 'src/app/utils/utils-input';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {NgSelectConfig} from '@ng-select/ng-select';
+import { NgSelectConfig } from '@ng-select/ng-select';
+import { PersonsComponent } from '../persons.component';
 
 @Component({
   selector: 'app-persons-modal',
@@ -17,6 +18,8 @@ export class PersonsModalComponent implements OnInit {
 
   @Input() id_person: number | undefined;
 
+  @Input() message: string | undefined;
+  
   modal = {} as any;
   validate_person!: FormGroup;
   cars: any = [];
@@ -26,26 +29,6 @@ export class PersonsModalComponent implements OnInit {
   constructor(private config: NgSelectConfig, private fb: FormBuilder, private _spinner: NgxSpinnerService, public activeModal: NgbActiveModal, private toastr: ToastrService) {
     this.config.appendTo = 'body';
   }
-
-  // ngOnInit(): void {
-  //   if (this.id_person) {
-  //     this._spinner.show();
-  //     axios.get(`/api/person/${this.id_person}`).then(({ data }) => {
-  //       this.modal = data;
-  //       this.personCars = this.modal.cars;
-  //       this._spinner.hide();
-  //     }).catch(() => this.toastr.error('Eroare la preluarea persoanelor!'));
-  //   }
-  //   this.validate_person = this.fb.group({
-  //     fname: ['', Validators.required],
-  //     lname: ['', Validators.required],
-  //     cnp: ['', Validators.required],
-  //     age: ['', Validators.required]
-  //   });
-  //   axios.get('/api/car').then(({ data }) => {
-  //     this.cars = data;
-  //   });
-  // }
 
   ngOnInit(): void {
     if (this.id_person) {
