@@ -22,7 +22,7 @@ module.exports = db => {
     },
 
     findAll: async (req, res) => {
-      const findPersons = await db.models.Persons.findAll({ include: {association: 'cars'}}).catch(() => res.status(401));
+      const findPersons = await db.models.Persons.findAll({ include: {association: 'cars'}, order: [['id', 'ASC']]}).catch(() => res.status(401));
         res.send(findPersons);
     },
     find: async (req, res) => {
