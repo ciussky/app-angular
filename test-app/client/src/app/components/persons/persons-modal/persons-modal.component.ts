@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { REPLACE_DIACRITICS } from 'src/app/utils/utils-input';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {NgSelectConfig} from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-persons-modal',
@@ -19,17 +20,39 @@ export class PersonsModalComponent implements OnInit {
   modal = {} as any;
   validate_person!: FormGroup;
   cars: any = [];
-  public ngSelected: any = [];
+  personCars: any = [];
   submitted = false;
 
-  constructor(private fb: FormBuilder, private _spinner: NgxSpinnerService, public activeModal: NgbActiveModal, private toastr: ToastrService) {
+  constructor(private config: NgSelectConfig, private fb: FormBuilder, private _spinner: NgxSpinnerService, public activeModal: NgbActiveModal, private toastr: ToastrService) {
+    this.config.appendTo = 'body';
   }
+
+  // ngOnInit(): void {
+  //   if (this.id_person) {
+  //     this._spinner.show();
+  //     axios.get(`/api/person/${this.id_person}`).then(({ data }) => {
+  //       this.modal = data;
+  //       this.personCars = this.modal.cars;
+  //       this._spinner.hide();
+  //     }).catch(() => this.toastr.error('Eroare la preluarea persoanelor!'));
+  //   }
+  //   this.validate_person = this.fb.group({
+  //     fname: ['', Validators.required],
+  //     lname: ['', Validators.required],
+  //     cnp: ['', Validators.required],
+  //     age: ['', Validators.required]
+  //   });
+  //   axios.get('/api/car').then(({ data }) => {
+  //     this.cars = data;
+  //   });
+  // }
 
   ngOnInit(): void {
     if (this.id_person) {
       this._spinner.show();
       axios.get(`/api/person/${this.id_person}`).then(({ data }) => {
         this.modal = data;
+        this.personCars = this.modal.cars;
         this._spinner.hide();
       }).catch(() => this.toastr.error('Eroare la preluarea persoanelor!'));
     }
@@ -75,10 +98,6 @@ export class PersonsModalComponent implements OnInit {
       this.modal.age = result;
     }
   }
-
-  selectedCars(selected: any) {
-    this.ngSelected = selected;
-  }
   
   save(): void {
     if (this.modal.cnp && this.modal.cnp.length === 13) {
@@ -93,7 +112,6 @@ export class PersonsModalComponent implements OnInit {
 
       if (!this.id_person) {
         axios.post('/api/person', this.modal).then(() => {
-
           this._spinner.hide();
           this.toastr.success('Persoana a fost salvată cu succes!');
           this.activeModal.close();

@@ -26,7 +26,7 @@ module.exports = db => {
         res.send(findPersons);
     },
     find: async (req, res) => {
-      const editPerson = await db.models.Persons.findOne({ where: { id: req.params.id}}).catch(() => res.status(401));
+      const editPerson = await db.models.Persons.findOne({ include: {association: 'cars'}, where: { id: req.params.id}}).catch(() => res.status(401));
       res.send(editPerson);
     },
 

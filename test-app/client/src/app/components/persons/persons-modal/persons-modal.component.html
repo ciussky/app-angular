@@ -47,13 +47,14 @@
 
     <div class="col-4">
       <ng-select 
-      [items]="cars" 
+      [(ngModel)]="personCars"
       bindLabel="make" 
+      [items]="cars" 
       bindValue="id" 
-      [(ngModel)]="modal.ngSelected"
       [multiple]="true"
       [closeOnSelect]="false"
-      > </ng-select>
+      >
+     </ng-select>
     </div>
   </div>
   

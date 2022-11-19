@@ -34,11 +34,11 @@ export class PersonsComponent implements OnInit {
   }
 
   addEdit = (id_person?: number): void => {
-    const modalRef = this._modal.open(PersonsModalComponent, {size: 'lg', keyboard: false, backdrop: 'static'});
-    modalRef.componentInstance.id_person = id_person;
-    modalRef.closed.subscribe(() => {
-      this.loadData();
-    });
+      const modalRef = this._modal.open(PersonsModalComponent, {size: 'lg', keyboard: false, backdrop: 'static'});
+      modalRef.componentInstance.id_person = id_person;
+      modalRef.closed.subscribe(() => {
+        this.loadData();
+      });
   }
 
   delete = (person: any): void => {
