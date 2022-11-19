@@ -74,7 +74,6 @@ export class PersonsModalComponent implements OnInit {
     this.modal.age = result;
   }
 
-
   selectedCars(selected: any) {
     this.ngSelected = selected;
   }

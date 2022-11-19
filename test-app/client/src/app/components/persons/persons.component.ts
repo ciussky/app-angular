@@ -18,7 +18,6 @@ export class PersonsComponent implements OnInit {
   faTrashAlt = faTrashAlt; faEdit = faEdit; faChevronUp = faChevronUp; faPlus = faPlus;
   limit: number = 70; showBackTop: string = '';
   persons: any = [];
-  cars: any= [];
   constructor(private _modal: NgbModal, private _spinner: NgxSpinnerService, private toastr: ToastrService) { SET_HEIGHT('view', 20, 'height'); }
 
 
@@ -28,16 +27,11 @@ export class PersonsComponent implements OnInit {
 
   loadData = (): void => {
     this._spinner.show();
-    axios.get('/api/person').then(({ data }) => {
+    axios.get('/api/person/').then(({ data }) => {
       this.persons = data;
-
-      if(this.persons[0]){
-        this.cars = this.persons[0].cars;
-      }
       this._spinner.hide();
     }).catch((error) => this.toastr.error(error.message));
   }
-
 
   addEdit = (id_person?: number): void => {
     const modalRef = this._modal.open(PersonsModalComponent, {size: 'lg', keyboard: false, backdrop: 'static'});
