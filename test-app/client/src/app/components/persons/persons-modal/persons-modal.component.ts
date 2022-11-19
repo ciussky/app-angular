@@ -71,7 +71,9 @@ export class PersonsModalComponent implements OnInit {
   }
 
   updateAge(result: any): void {
-    this.modal.age = result;
+    if(result){
+      this.modal.age = result;
+    }
   }
 
   selectedCars(selected: any) {
