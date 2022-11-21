@@ -22,7 +22,7 @@ module.exports = db => {
 
     find: (req, res) => {
       db.query(`SELECT id, make, model, makeyear, ccapicity, tax
-      FROM "Cars"`, { type: db.QueryTypes.SELECT }).then(resp => {
+      FROM "Cars" WHERE id = ${req.params.id}`, { type: db.QueryTypes.SELECT }).then(resp => {
         res.send(resp[0]);
       }).catch(() => res.status(401));
     },

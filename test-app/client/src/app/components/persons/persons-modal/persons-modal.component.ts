@@ -6,7 +6,6 @@ import { REPLACE_DIACRITICS } from 'src/app/utils/utils-input';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgSelectConfig } from '@ng-select/ng-select';
-import { PersonsComponent } from '../persons.component';
 
 @Component({
   selector: 'app-persons-modal',
@@ -16,10 +15,7 @@ import { PersonsComponent } from '../persons.component';
 
 export class PersonsModalComponent implements OnInit {
 
-  @Input() id_person: number | undefined;
-
-  @Input() message: string | undefined;
-  
+  @Input() id_person: number | undefined;  
   modal = {} as any;
   validate_person!: FormGroup;
   cars: any = [];
@@ -35,7 +31,10 @@ export class PersonsModalComponent implements OnInit {
       this._spinner.show();
       axios.get(`/api/person/${this.id_person}`).then(({ data }) => {
         this.modal = data;
-        this.personCars = this.modal.cars;
+        for(let car of data.cars){
+          this.personCars.push(car.id);
+        }
+        this.modal.ngSelected = this.personCars;
         this._spinner.hide();
       }).catch(() => this.toastr.error('Eroare la preluarea persoanelor!'));
     }

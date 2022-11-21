@@ -20,7 +20,6 @@ export class PersonsComponent implements OnInit {
   persons: any = [];
   constructor(private _modal: NgbModal, private _spinner: NgxSpinnerService, private toastr: ToastrService) { SET_HEIGHT('view', 20, 'height'); }
 
-
   ngOnInit(): void {
     this.loadData();
   }
@@ -37,7 +36,7 @@ export class PersonsComponent implements OnInit {
       const modalRef = this._modal.open(PersonsModalComponent, {size: 'lg', keyboard: false, backdrop: 'static'});
       modalRef.componentInstance.id_person = id_person;
       modalRef.closed.subscribe(() => {
-        this.loadData();
+          this.loadData();
       });
   }
 
