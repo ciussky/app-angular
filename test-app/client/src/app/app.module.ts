@@ -20,6 +20,7 @@ import { PersonsComponent } from './components/persons/persons.component';
 import { PersonsModalComponent } from './components/persons/persons-modal/persons-modal.component';
 import { CarsComponent } from './components/cars/cars.component';
 import { CarsModalComponent } from './components/cars/cars-modal/cars-modal.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CarsModalComponent } from './components/cars/cars-modal/cars-modal.comp
     PersonsComponent,
     PersonsModalComponent,
     CarsComponent,
-    CarsModalComponent
+    CarsModalComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

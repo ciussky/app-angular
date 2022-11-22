@@ -7,6 +7,7 @@ import { PersonsModalComponent } from './persons-modal/persons-modal.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-persons',
@@ -14,14 +15,20 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
   styleUrls: ['./persons.component.scss']
 })
 export class PersonsComponent implements OnInit {
-
   faTrashAlt = faTrashAlt; faEdit = faEdit; faChevronUp = faChevronUp; faPlus = faPlus;
   limit: number = 70; showBackTop: string = '';
   persons: any = [];
-  constructor(private _modal: NgbModal, private _spinner: NgxSpinnerService, private toastr: ToastrService) { SET_HEIGHT('view', 20, 'height'); }
+ 
+  constructor(private _modal: NgbModal, private _spinner: NgxSpinnerService, private toastr: ToastrService) {   
+    SET_HEIGHT('view', 20, 'height');
+   }
 
+    fname = new FormControl('');
+    cnp = new FormControl('');
+    age = new FormControl('');
+  
   ngOnInit(): void {
-    this.loadData();
+      this.loadData();
   }
 
   loadData = (): void => {

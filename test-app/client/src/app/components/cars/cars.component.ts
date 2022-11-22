@@ -7,6 +7,7 @@ import { CarsModalComponent } from './cars-modal/cars-modal.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-cars',
@@ -19,7 +20,11 @@ export class CarsComponent implements OnInit {
   limit: number = 70; showBackTop: string = '';
   cars: any = [];
   constructor(private _modal: NgbModal, private _spinner: NgxSpinnerService, private toastr: ToastrService) { SET_HEIGHT('view', 20, 'height'); }
-
+  make = new FormControl('');
+  model = new FormControl('');
+  makeyear = new FormControl('');
+  ccapicity = new FormControl('');
+  tax = new FormControl('');
 
   ngOnInit(): void {
     this.loadData();
